@@ -22,3 +22,13 @@ export const makeExpensive = <T extends (...args: any[]) => any>(
     return fn(...args);
   };
 };
+
+export const makeExpensivePromise = <T extends (...args: any[]) => any>(
+  fn: T,
+  duration = defaultDuration,
+): ((...args: Parameters<T>) => Promise<ReturnType<T>>) => {
+  return async (...args: Parameters<T>): Promise<ReturnType<T>> => {
+    await new Promise((resolve) => setTimeout(resolve, duration));
+    return fn(...args);
+  };
+};
