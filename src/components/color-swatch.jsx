@@ -1,9 +1,12 @@
-const ColorSwatch = ({ color, ...props }) => {
+import { useGameContext } from '../contexts/game-context';
+
+const ColorSwatch = () => {
+  const { correctAnswer } = useGameContext();
+
   return (
     <div
       className="h-96 w-96"
-      {...props}
-      style={{ backgroundColor: '#' + color }}
+      style={{ backgroundColor: '#' + correctAnswer }}
     />
   );
 };
